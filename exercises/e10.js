@@ -1,17 +1,26 @@
 export const getFirstResolvedPromise = (promises) => {
   //*  write code to pass test ⬇ ️
+  return Promise.any(promises).then((res) => res);
 };
 
 export const getFirstPromiseOrFail = (promises) => {
   //*  write code to pass test ⬇ ️
+  return Promise.race(promises);
 };
 
 export const getQuantityOfRejectedPromises = (promises) => {
   //*  write code to pass test ⬇ ️
+
+  return Promise.allSettled(promises).then((results) =>
+    results.filter((result) => result.status === "rejected").map(result => result))
+    .then(results => results.length);
 };
 
 export const getQuantityOfFulfilledPromises = (promises) => {
   //*  write code to pass test ⬇ ️
+  return Promise.allSettled(promises).then((results) =>
+    results.filter((result) => result.status === "fulfilled").map(result => result))
+    .then(results => results.length);
 };
 
 //!  ⬇ ⬇ ⬇ ⬇ Don't Edit This Array ⬇ ⬇ ⬇ ⬇
@@ -42,7 +51,24 @@ export const fetchCharacterById = (id) => {
 //! ⬆  ⬆  ⬆  ⬆ do not edit this function   ⬆  ⬆  ⬆  ⬆ ️
 
 export const fetchAllCharactersByIds = async (ids) => {
-  // To solve this you must fetch all characters passed in the array at the same time
-  // use the `fetchCharacterById` function above to make this work
-  //*  write code to pass test ⬇ ️
-};
+  const arrayOfPromises =  ids.map(elem => fetchCharacterById(elem).then(val => val));
+
+  return Promise.all(arrayOfPromises)
+    .then(results => results)
+    .catch(() => []);
+    
+}
+
+/* 
+  You need to somehow get the element.value in the returned Promise (array of objects)
+  that matches the chars.id in the allCharacters array 
+  and if the element.value matches the chars.id, return the names.
+
+  1. Are we supposed to use await?
+  2. Are we supposed to call the fetchCharacterById function?
+  3. Can/are we supposed to use the allCharacters array?
+
+  turn array of ids into an array of promises
+  Which static promise method is the most helpful? <<< Make sure of this
+  How do we handle a reject of a promise?
+*/
