@@ -34,8 +34,8 @@ export const getPromise = (boolean) => {
 export const handlePromise = (promise) => {
   return promise
   .then(
-    () => { 
-      return "yoyoyo, I'm jon H and I'm ready to go";
+    (val) => { 
+      return val;
     },
     () => { 
       return "Uh Oh"; 

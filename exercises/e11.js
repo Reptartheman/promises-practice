@@ -60,8 +60,9 @@ const getData = getLoginList(usersUrl);
 // Your code goes here ...
 export const result = getData
   .then(response => {
-    console.log(response.map(res => res.login));
-    return response.map(res => res.login)
+    const res = response.map(res => res.login)
+    console.log(res);
+    return res;
   })
 
 

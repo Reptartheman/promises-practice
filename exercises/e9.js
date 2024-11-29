@@ -75,6 +75,11 @@ export const promise =  Promise.resolve(iterate(1))
                           .then(val => iterate(val))
                           .then(val => iterate(val))
                           .then(() => alwaysThrows())
+                          .then(val => iterate(val))
+                          .then(val => iterate(val))
+                          .then(val => iterate(val))
+                          .then(val => iterate(val))
+                          .then(val => iterate(val))
                           .catch(err => onReject(err));
 
 

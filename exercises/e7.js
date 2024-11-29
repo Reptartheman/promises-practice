@@ -57,7 +57,7 @@ export const handlePromise = (promise) => {
   return promise
     .then(val => val)
     .catch(err => {
-      if (Object.prototype.hasOwnProperty.call(err, 'message')) {
+      if (err.message) {
         return onReject(err);
       } else {
         return err
